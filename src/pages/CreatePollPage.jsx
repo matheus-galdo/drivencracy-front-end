@@ -23,11 +23,11 @@ export default function CreatePollPage() {
 
   return (
     <TransactionsContainer>
-      <h1>Nova TRANSAÇÃO</h1>
+      <h1>Nova ENQUETE</h1>
       <form onSubmit={createPoll}>
         <input placeholder="Título" type="text" name="title" required onChange={handleForm} />
         <input placeholder="Expira em" type="datetime-local" name="expireAt" onChange={handleForm} />
-        <button>Salvar TRANSAÇÃO</button>
+        <button>Criar ENQUETE</button>
       </form>
     </TransactionsContainer>
   )

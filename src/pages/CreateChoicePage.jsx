@@ -6,21 +6,18 @@ import { useState, useEffect } from "react";
 export default function CreateChoicePage() {
   const [pollForm, setPollForm] = useState({});
   const [choices, setChoices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
   const { pollId } = useParams();
-
-  const errorMessages = {
-    404: 'Enquete não existe',
-    409: 'Opção já existe',
-    422: 'Título da opção é obrigatório',
-  };
 
   useEffect(() => {
     axios.get(`http://localhost:5000/poll/${pollId}/choice`)
-      .then(response => setChoices(response.data))
+      .then(response => {
+        setChoices(response.data);
+        setLoading(false);
+      })
       .catch();
   }, []);
-
-  console.log(choices);
 
   function createChoice(event) {
     event.preventDefault();
@@ -49,16 +46,28 @@ export default function CreateChoicePage() {
         <button>Criar</button>
       </form>
 
-      <Link>
-        listar choices criadas
-      </Link>
 
-      {choices.map(choice => <p>{choice.title}</p>)}
-      <Link to="/home">Home</Link>
+      {loading ? <>Carregando...</> : <>
+        { choices.length > 0 ?
+          <>
+            {choices.map(choice => <p>{choice.title}</p>)}
+          </>
+          :
+          <>Você ainda não criou nenhuma opção para essa enquete</>
+        }
+      </>}
+
+      <Link to="/">Home</Link>
     </CreateChoiceContainer>
 
   )
 }
+
+const errorMessages = {
+  404: 'Enquete não existe',
+  409: 'Opção já existe',
+  422: 'Título da opção é obrigatório',
+};
 
 const CreateChoiceContainer = styled.section`
   height: 100vh;

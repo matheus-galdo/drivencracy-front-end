@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
         outline: none;
         border: none;
         border-radius: 5px;
-        background-color: #a328d6;
+        background-color: #5dadec;
         font-size: 20px;
         font-weight: 600;
         color: #fff;
@@ -31,8 +31,8 @@ const GlobalStyle = createGlobalStyle`
         border: 1px solid #ccc;
         padding: 15px;
         margin: 1px;
-        :focus {
-            border: 2px solid #ffb6b6;
+        &:focus {
+            border: 2px solid #afd9fb;
             margin: 0px;
         }
     }
