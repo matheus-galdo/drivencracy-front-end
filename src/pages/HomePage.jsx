@@ -42,7 +42,7 @@ const PollsContainer = styled.article`
   border-radius: 5px;
   padding: 16px;
   display: flex;
-  gap: 10px;
+  gap: 20px;
   flex-direction: column;
   article {
     display: flex;

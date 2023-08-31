@@ -5,7 +5,9 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Jost', sans-serif;
         font-style: normal;
         font-weight: 400;
+        box-sizing: border-box;
     }
+    
     button {
         outline: none;
         border: none;
