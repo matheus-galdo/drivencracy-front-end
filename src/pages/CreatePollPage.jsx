@@ -1,9 +1,7 @@
 import styled from "styled-components"
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
 import { useState } from "react";
-
-
+import { postPoll } from "../service/pollService";
 
 export default function CreatePollPage() {
   const [pollForm, setPollForm] = useState({});
@@ -12,7 +10,7 @@ export default function CreatePollPage() {
   function createPoll(event) {
     event.preventDefault();
 
-    axios.post(`http://localhost:5000/poll`, pollForm)
+    postPoll(pollForm)
       .then(response => navigate(`/poll/${response.data._id}/criar-choices`))
       .catch();
   }

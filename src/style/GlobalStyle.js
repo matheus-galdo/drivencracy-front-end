@@ -51,7 +51,6 @@ const GlobalStyle = createGlobalStyle`
         line-height: 18px;
         color: black;
         text-decoration: none;
-        padding-top: 30px;
     }
 `
 

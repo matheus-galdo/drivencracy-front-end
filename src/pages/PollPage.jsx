@@ -1,7 +1,8 @@
 import styled from "styled-components"
 import { Link, useParams } from 'react-router-dom';
-import axios from "axios";
 import { useState, useEffect } from "react";
+import { getPollChoices, voteChoice } from "../service/choiceService";
+import { getPollResult } from "../service/pollService";
 
 export default function PollPage() {
   const [choices, setChoices] = useState([]);
@@ -10,7 +11,7 @@ export default function PollPage() {
   const { pollId } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/poll/${pollId}/result`)
+    getPollResult()
       .then(response => {
         setPullResult(response.data);
         setLoading(false);
@@ -19,7 +20,7 @@ export default function PollPage() {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/poll/${pollId}/choice`)
+    getPollChoices(pollId)
       .then(response => {
         setChoices(response.data);
         setLoading(false);
@@ -46,7 +47,7 @@ export default function PollPage() {
 
 function Choice({ choice }) {
   function voteOnChoice(event) {
-    axios.post(`http://localhost:5000/choice/${choice._id}/vote`)
+    voteChoice(choice._id)
       .then(response => {
         // setChoices(response.data);
         // setLoading(false);

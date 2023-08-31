@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Link, useParams } from 'react-router-dom';
-import axios from "axios";
 import { useState, useEffect } from "react";
+import { getPollChoices, postChoice } from "../service/choiceService";
 
 export default function CreateChoicePage() {
   const [pollForm, setPollForm] = useState({});
@@ -11,7 +11,7 @@ export default function CreateChoicePage() {
   const { pollId } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/poll/${pollId}/choice`)
+    getPollChoices(pollId)
       .then(response => {
         setChoices(response.data);
         setLoading(false);
@@ -22,7 +22,7 @@ export default function CreateChoicePage() {
   function createChoice(event) {
     event.preventDefault();
 
-    axios.post(`http://localhost:5000/choice`, { ...pollForm, pollId })
+    postChoice({ ...pollForm, pollId })
       .then(response => {
         setChoices([...choices, response.data])
       })
