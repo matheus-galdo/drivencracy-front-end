@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     * {
-        font-family: 'Raleway';
+        font-family: 'Jost', sans-serif;
         font-style: normal;
         font-weight: 400;
     }
@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
     h1 {
         font-weight: 700;
         font-size: 26px;
-        color: white;
+        color: black;
     }
     input {
         font-size: 20px;
@@ -49,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 700;
         font-size: 15px;
         line-height: 18px;
-        color: white;
+        color: black;
         text-decoration: none;
         padding-top: 30px;
     }

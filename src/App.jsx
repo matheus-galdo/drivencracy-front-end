@@ -1,19 +1,19 @@
 import { styled } from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SignInPage from './pages/SignInPage';
-import SignUpPage from './pages/SignUpPage';
+import CreateChoicePage from './pages/CreateChoicePage';
 import HomePage from './pages/HomePage';
-import TransactionsPage from './pages/TransactionPage';
+import CreatePollPage from './pages/CreatePollPage';
 
 export default function App() {
   return (
     <PagesContainer>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SignInPage />} />
-          <Route path="/cadastro" element={<SignUpPage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/nova-transacao/:tipo" element={<TransactionsPage />} />
+          <Route path="/criar-poll" element={<CreatePollPage />} />
+          <Route path="/poll/:pollId/criar-choices" element={<CreateChoicePage />} />
+          
         </Routes>
       </BrowserRouter>
     </PagesContainer>
@@ -21,7 +21,6 @@ export default function App() {
 }
 
 const PagesContainer = styled.main`
-  background-color: #8c11be;
   width: calc(100vw - 50px);
   max-height: 100vh;
   padding: 25px;

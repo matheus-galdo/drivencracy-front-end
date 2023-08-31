@@ -1,54 +1,52 @@
-import styled from "styled-components"
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import axios from "axios";
+import logoDrivencracy from "../assets/drivencracy-logo.svg";
 
 export default function HomePage() {
+  const [polls, setPolls] = useState(null);
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/poll`)
+      .then(response => setPolls(response.data))
+      .catch();
+  }, []);
+
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Fulano</h1>
-        <BiExit />
+        <img src={logoDrivencracy} alt="Logo drivencracy" />
+        <h1>DrivenCracy</h1>
       </Header>
 
-      <TransactionsContainer>
-        <ul>
-          <ListItemContainer>
-            <div>
-              <span>30/11</span>
-              <strong>Almoço mãe</strong>
-            </div>
-            <Value color={"negativo"}>120,00</Value>
-          </ListItemContainer>
+      <PollsContainer>
+        {polls?.map(poll => <Poll poll={poll} />)}
 
-          <ListItemContainer>
-            <div>
-              <span>15/11</span>
-              <strong>Salário</strong>
-            </div>
-            <Value color={"positivo"}>3000,00</Value>
-          </ListItemContainer>
-        </ul>
-
-        <article>
-          <strong>Saldo</strong>
-          <Value color={"positivo"}>2880,00</Value>
-        </article>
-      </TransactionsContainer>
+      </PollsContainer>
 
 
-      <ButtonsContainer>
         <button>
-          <AiOutlinePlusCircle />
-          <p>Nova <br /> entrada</p>
+          <Link to="/criar-poll">
+            <p>Nova <br /> poll</p>
+          </Link>
         </button>
-        <button>
-          <AiOutlineMinusCircle />
-          <p>Nova <br />saída</p>
-        </button>
-      </ButtonsContainer>
 
     </HomeContainer>
   )
 }
+
+function Poll({ poll }) {
+  return <PollContainer>
+    <Link to={`/poll/${poll._id}`}>
+      {poll.title}
+    </Link>
+  </PollContainer>;
+}
+
+const PollContainer = styled.article`
+  border: 1px solid black;
+`;
 
 const HomeContainer = styled.div`
   display: flex;
@@ -58,21 +56,27 @@ const HomeContainer = styled.div`
 const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
   padding: 0 2px 5px 2px;
   margin-bottom: 15px;
   font-size: 26px;
-  color: white;
+  color: black;
+
+  img{
+    width: 50px;
+  }
 `
-const TransactionsContainer = styled.article`
+const PollsContainer = styled.article`
   flex-grow: 1;
   background-color: #fff;
   color: #000;
   border-radius: 5px;
   padding: 16px;
   display: flex;
+  gap: 10px;
   flex-direction: column;
-  justify-content: space-between;
   article {
     display: flex;
     justify-content: space-between;   
@@ -99,22 +103,5 @@ const ButtonsContainer = styled.section`
     p {
       font-size: 18px;
     }
-  }
-`
-const Value = styled.div`
-  font-size: 16px;
-  text-align: right;
-  color: ${(props) => (props.color === "positivo" ? "green" : "red")};
-`
-const ListItemContainer = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  color: #000000;
-  margin-right: 10px;
-  div span {
-    color: #c6c6c6;
-    margin-right: 10px;
   }
 `
