@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACK_END_URL = 'http://localhost:5000';
+const BACK_END_URL = 'https://api-drivencracy-4741.onrender.com';
 
 /**
  * Lista todas as opções de uma enquete

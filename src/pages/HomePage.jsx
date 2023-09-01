@@ -24,8 +24,6 @@ export default function HomePage() {
             <PollsContainer>    
                 {polls?.map(poll => <Poll key={poll._id} poll={poll} />)}
             </PollsContainer>
-
-
         </HomeContainer>
     )
 }
