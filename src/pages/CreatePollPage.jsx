@@ -22,7 +22,13 @@ export default function CreatePollPage() {
     }
 
     function handleForm(event) {
-        setPollForm({ ...pollForm, [event.target.name]: event.target.value });
+        const newPollForm = { ...pollForm, [event.target.name]: event.target.value }
+
+        if (event.target.name === 'expireAt') {
+            newPollForm['expireAt'] = event.target.value.replace('T',' ');
+        }
+
+        setPollForm(newPollForm);
     }
 
     return <CreatePollContainer>
