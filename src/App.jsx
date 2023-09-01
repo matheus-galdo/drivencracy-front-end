@@ -26,6 +26,7 @@ export default function App() {
 
 const PagesContainer = styled.main`
     width: calc(100vw - 50px);
+    max-width: 1000px;
     margin: auto;
     max-height: 100vh;
     padding: 25px;

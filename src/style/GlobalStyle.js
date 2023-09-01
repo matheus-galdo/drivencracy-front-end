@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
     }
     input {
         font-size: 20px;
-        width: calc(100% - 30px);
+        width: 100%;
         border-radius: 5px;
         outline: none;
         border: 1px solid #ccc;
