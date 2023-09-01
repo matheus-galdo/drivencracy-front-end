@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { getPollChoices, postChoice } from "../service/choiceService";
 import { axiosErrorHandler } from "../service/errorHandler";
+import LinkButton from "../components/LinkButton";
 
 //erros validados pelo back-end no POST /choice
 const postChoiceErrorMessages = {
@@ -44,27 +45,50 @@ export default function CreateChoicePage() {
 
     return (
         <CreateChoiceContainer>
+            <ResultButtonContainerRow>
+                <LinkButton path={`/`}>
+                    Voltar pra home
+                </LinkButton>
+            </ResultButtonContainerRow>
+
             <form onSubmit={createChoice}>
                 <input placeholder="Opção" type="text" name="title" required onChange={handleForm} />
                 <button>Criar</button>
             </form>
 
-            {choices.length > 0 ?
-                <>
+            <CreatedOptionContainer>
+                {choices.length > 0 ? <>
+                    <h1>Opções criadas</h1>
                     {choices.map(choice => <p key={choice._id}>{choice.title}</p>)}
                 </>
-                :
-                <>Você ainda não criou nenhuma opção para essa enquete</>
-            }
-
-            <Link to="/">Home</Link>
+                    :
+                    <>Você ainda não criou nenhuma opção para essa enquete</>
+                }
+            </CreatedOptionContainer>
         </CreateChoiceContainer>
     )
 }
+
+
+const CreatedOptionContainer = styled.div`
+    padding-top: 20px;
+    h1{
+        padding-bottom: 20px;
+    }
+    p{
+        line-height: 28px;
+    }
+`;
 
 const CreateChoiceContainer = styled.section`
     padding: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-`
+`;
+
+const ResultButtonContainerRow = styled.div`
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+`;
