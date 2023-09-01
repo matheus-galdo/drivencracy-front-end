@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { getPollChoices, voteChoice } from "../service/choiceService";
 import Choice from "../components/Choice";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function ChoiceVotePage() {
     const [choices, setChoices] = useState([]);
@@ -31,6 +31,10 @@ export default function ChoiceVotePage() {
     return <ChoiceVoteContainer>
         {choices.length > 0 ?
             <>
+                <LinkButton path={`/poll/${pollId}/result`}>
+                        Ver resultado da enquete
+                </LinkButton>
+
                 <form onSubmit={submitVote}>
                     {choices.map(choice => <Choice key={choice._id} choice={choice} {...choiceProps} />)}
 
@@ -38,6 +42,7 @@ export default function ChoiceVotePage() {
                         {selectedChoiceId ? "Votar" : "Escolha uma opção"}
                     </VoteButton>
                 </form>
+
 
             </>
             :

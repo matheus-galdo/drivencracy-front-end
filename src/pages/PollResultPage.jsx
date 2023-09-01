@@ -1,55 +1,66 @@
 import styled from "styled-components"
-import { Link, useParams } from 'react-router-dom';
+import dayjs from "dayjs";
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import { getPollChoices, voteChoice } from "../service/choiceService";
 import { getPollResult } from "../service/pollService";
+import LinkButton from "../components/LinkButton";
 
 export default function PollResultPage() {
-    const [choices, setChoices] = useState([]);
     const [pollResult, setPullResult] = useState(null);
-    const [loading, setLoading] = useState(true);
     const { pollId } = useParams();
 
     useEffect(() => {
         getPollResult(pollId)
             .then(response => {
                 setPullResult(response.data);
-                setLoading(false);
             })
             .catch();
     }, []);
 
-    useEffect(() => {
-        getPollChoices(pollId)
-            .then(response => {
-                setChoices(response.data);
-                setLoading(false);
-            })
-            .catch();
-    }, []);
+    const pollIsExpired = new Date() > new Date(pollResult?.expireAt);
 
     return (
-        <HomeContainer>
+        <PollResultContainer>
+            {pollResult && <>
+                <h1>{pollResult.title}</h1>
+                <h2>
+                    {pollIsExpired ? "Enquete encerrada" : `Enquete encerra em ${dayjs(pollResult.expireAt).format('DD/MM/YYYY HH:mm')}`}
+                </h2>
 
-            {loading ? <>Carregando...</> : <>
-                {choices.length > 0 ?
-                    <>
-                    </>
-                    :
-                    <>Esta enquete ainda não tem nenhuma opção para votar</>
-                }
+
+                <PollResult>
+                    <p>Vencedor da enquete:</p>
+                    <p>
+                        <strong>{pollResult.result.title}:</strong>
+                        <span>{pollResult.result.votes} votos</span>
+                    </p>
+                </PollResult>
             </>}
-
-        </HomeContainer>
+            
+            <LinkButton path="/">Voltar pra home</LinkButton>
+        </PollResultContainer>
     )
 }
 
-const PollContainer = styled.article`
-    border: 1px solid black;
+const PollResult = styled.p`
+padding-top: 16px;
+display: flex;
+flex-direction: column;
+align-items: center;
+    strong{
+        font-weight: bold;
+        margin-right: 5px;
+    }
+    span{
+        font-size: 28px;
+    }
 `;
 
-const HomeContainer = styled.div`
+const PollResultContainer = styled.div`
+    padding: 16px;
+    gap: 10px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     height: calc(100vh - 50px);
 `
