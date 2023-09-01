@@ -5,7 +5,7 @@ import { getPollChoices, voteChoice } from "../service/choiceService";
 import Choice from "../components/Choice";
 import { useNavigate } from 'react-router-dom';
 import LinkButton from "../components/LinkButton";
-import { axiosErrorHandler } from "../service/errorHandler";
+import { axiosErrorHandler } from "../utils/errorHandler";
 
 //erros validados pelo back-end no POST /choice/:id/vote
 const postVoteErrorMessage = {

@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { postPoll } from "../service/pollService";
-import {axiosErrorHandler} from "../service/errorHandler";
+import { axiosErrorHandler } from "../utils/errorHandler";
 
 //error validados pelo back-end no POST Poll
 const errorMessages = {

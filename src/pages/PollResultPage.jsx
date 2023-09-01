@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { getPollResult } from "../service/pollService";
 import LinkButton from "../components/LinkButton";
+import { axiosErrorHandler } from "../utils/errorHandler";
 
 //erros validados pelo back-end no GET /poll/:id/result
 const getPollResultErrorMessages = {

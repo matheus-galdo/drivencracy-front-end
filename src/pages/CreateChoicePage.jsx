@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { getPollChoices, postChoice } from "../service/choiceService";
-import { axiosErrorHandler } from "../service/errorHandler";
+import { axiosErrorHandler } from "../utils/errorHandler";
 import LinkButton from "../components/LinkButton";
 
 //erros validados pelo back-end no POST /choice

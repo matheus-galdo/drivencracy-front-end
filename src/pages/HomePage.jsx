@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getPolls } from "../service/pollService";
 import Poll from "../components/Poll";
-import { axiosErrorHandler } from "../service/errorHandler";
+import { axiosErrorHandler } from "../utils/errorHandler";
 import LinkButton from "../components/LinkButton";
 
 export default function HomePage() {

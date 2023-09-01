@@ -21,6 +21,7 @@ const HeaderContainer = styled.header`
     color: black;
   
     img{
+        transform: rotate(-8deg);
         width: 50px;
     }
 
