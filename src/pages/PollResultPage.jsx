@@ -37,7 +37,7 @@ export default function PollResultPage() {
                     <p>Vencedor da enquete:</p>
                     <p>
                         <strong>{pollResult.result.title}:</strong>
-                        <span>{pollResult.result.votes} votos</span>
+                        <span>{pollResult.result.votes} voto{Number(pollResult.result.votes) !== 1 && 's'}</span>
                     </p>
                 </PollResult>
             </>}
@@ -58,6 +58,7 @@ const PollResultContainer = styled.div`
 const PollResult = styled.div`
     padding-top: 16px;
     padding-bottom: 32px;
+    gap: 10px;
 
     display: flex;
     flex-direction: column;
