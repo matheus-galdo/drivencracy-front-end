@@ -15,8 +15,7 @@ const PollContainer = styled.article`
     align-items: center;
     min-height: 100px;
     border-radius: 10px;
-    padding: 20px;
-    padding-bottom: 40px;
+
     position: relative;
     cursor: pointer;
 
@@ -31,6 +30,9 @@ const PollContainer = styled.article`
 
 const CustomLink = styled(Link)`
     width: 100%;
+    height: 100%;
+    padding: 20px;
+    padding-bottom: 40px;
 `;
 
 const PollTitle = styled.h1`

@@ -33,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
         border: 1px solid #ccc;
         padding: 15px;
         margin: 1px;
-        &:focus {
+        &[type=text]:focus, &[type=datetime-local]:focus {
             border: 2px solid #afd9fb;
             margin: 0px;
         }
