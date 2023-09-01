@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { getPollChoices, voteChoice } from "../service/choiceService";
 import Choice from "../components/Choice";
 import { useNavigate, Link } from 'react-router-dom';
+import LinkButton from "../components/LinkButton";
 
 export default function ChoiceVotePage() {
     const [choices, setChoices] = useState([]);
