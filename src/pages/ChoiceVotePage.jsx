@@ -36,21 +36,23 @@ export default function ChoiceVotePage() {
                         Ver resultado da enquete
                 </LinkButton>
 
-                <form onSubmit={submitVote}>
+                <ChoicesForm onSubmit={submitVote}>
                     {choices.map(choice => <Choice key={choice._id} choice={choice} {...choiceProps} />)}
 
                     <VoteButton disabled={!selectedChoiceId}>
                         {selectedChoiceId ? "Votar" : "Escolha uma opção"}
                     </VoteButton>
-                </form>
-
-
+                </ChoicesForm>
             </>
             :
             <>Esta enquete ainda não tem nenhuma opção para votar</>
         }
     </ChoiceVoteContainer>;
 }
+
+const ChoicesForm = styled.form`
+    padding-top: 32px;
+`;
 
 const ChoiceVoteContainer = styled.div`
   display: flex;

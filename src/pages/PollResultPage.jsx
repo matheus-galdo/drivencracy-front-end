@@ -22,7 +22,7 @@ export default function PollResultPage() {
     return (
         <PollResultContainer>
             {pollResult && <>
-                <h1>{pollResult.title}</h1>
+                <PollResultTitle>{pollResult.title}</PollResultTitle>
                 <h2>
                     {pollIsExpired ? "Enquete encerrada" : `Enquete encerra em ${dayjs(pollResult.expireAt).format('DD/MM/YYYY HH:mm')}`}
                 </h2>
@@ -42,11 +42,22 @@ export default function PollResultPage() {
     )
 }
 
-const PollResult = styled.p`
-padding-top: 16px;
-display: flex;
-flex-direction: column;
-align-items: center;
+const PollResultContainer = styled.div`
+    padding: 16px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 50px);
+`
+
+const PollResult = styled.div`
+    padding-top: 16px;
+    padding-bottom: 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     strong{
         font-weight: bold;
         margin-right: 5px;
@@ -56,11 +67,8 @@ align-items: center;
     }
 `;
 
-const PollResultContainer = styled.div`
-    padding: 16px;
-    gap: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: calc(100vh - 50px);
-`
+const PollResultTitle = styled.h1`
+    text-align: center;
+    padding-bottom: 32px;
+`;
+
