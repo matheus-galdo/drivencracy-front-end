@@ -5,6 +5,11 @@ import { useState, useEffect } from "react";
 import { getPollResult } from "../service/pollService";
 import LinkButton from "../components/LinkButton";
 
+//erros validados pelo back-end no GET /poll/:id/result
+const getPollResultErrorMessages = {
+    404: 'Enquete não existe',
+};
+
 export default function PollResultPage() {
     const [pollResult, setPullResult] = useState(null);
     const { pollId } = useParams();
@@ -14,9 +19,10 @@ export default function PollResultPage() {
             .then(response => {
                 setPullResult(response.data);
             })
-            .catch();
+            .catch(error => axiosErrorHandler(error, getPollResultErrorMessages));
     }, []);
 
+    //variável booleana usada pra checar se enquete está expirada
     const pollIsExpired = new Date() > new Date(pollResult?.expireAt);
 
     return (
@@ -26,7 +32,6 @@ export default function PollResultPage() {
                 <h2>
                     {pollIsExpired ? "Enquete encerrada" : `Enquete encerra em ${dayjs(pollResult.expireAt).format('DD/MM/YYYY HH:mm')}`}
                 </h2>
-
 
                 <PollResult>
                     <p>Vencedor da enquete:</p>
@@ -48,8 +53,7 @@ const PollResultContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(100vh - 50px);
-`
+`;
 
 const PollResult = styled.div`
     padding-top: 16px;
@@ -71,4 +75,3 @@ const PollResultTitle = styled.h1`
     text-align: center;
     padding-bottom: 32px;
 `;
-

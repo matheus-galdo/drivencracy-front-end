@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { postPoll } from "../service/pollService";
-import axiosErrorHandler from "../service/errorHandler";
+import {axiosErrorHandler} from "../service/errorHandler";
 
 //error validados pelo back-end no POST Poll
 const errorMessages = {
@@ -25,17 +25,17 @@ export default function CreatePollPage() {
         setPollForm({ ...pollForm, [event.target.name]: event.target.value });
     }
 
-    return <TransactionsContainer>
+    return <CreatePollContainer>
         <PageTitle>Criar Enquete</PageTitle>
         <form onSubmit={createPoll}>
             <input placeholder="Título" type="text" name="title" required onChange={handleForm} />
             <input placeholder="Expira em" type="datetime-local" name="expireAt" onChange={handleForm} />
             <button>Criar</button>
         </form>
-    </TransactionsContainer>;
+    </CreatePollContainer>;
 }
 
-const TransactionsContainer = styled.main`
+const CreatePollContainer = styled.main`
     padding: 16px;
     display: flex;
     flex-direction: column;

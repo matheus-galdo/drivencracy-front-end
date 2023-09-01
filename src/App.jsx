@@ -5,7 +5,7 @@ import HomePage from './pages/HomePage';
 import CreatePollPage from './pages/CreatePollPage';
 import Header from './components/Header';
 import PollResultPage from './pages/PollResultPage';
-import ChoiceVotePage from './pages/ChoiceVotePage';
+import VoteChoicePage from './pages/VoteChoicePage';
 
 export default function App() {
     return (
@@ -14,7 +14,7 @@ export default function App() {
                 <Header />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/poll/:pollId" element={<ChoiceVotePage />} />
+                    <Route path="/poll/:pollId" element={<VoteChoicePage />} />
                     <Route path="/poll/:pollId/result" element={<PollResultPage />} />
                     <Route path="/criar-poll" element={<CreatePollPage />} />
                     <Route path="/poll/:pollId/criar-choices" element={<CreateChoicePage />} />
