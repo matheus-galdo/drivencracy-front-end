@@ -19,7 +19,7 @@ const getChoicesErrorMessages = {
 };
 
 export default function CreateChoicePage() {
-    const [pollForm, setPollForm] = useState({});
+    const [pollTitle, setPollTitle] = useState('');
     const [choices, setChoices] = useState([]);
     const { pollId } = useParams();
 
@@ -34,13 +34,16 @@ export default function CreateChoicePage() {
     function createChoice(event) {
         event.preventDefault();
 
-        postChoice({ ...pollForm, pollId })
-            .then(response => setChoices([...choices, response.data]))
+        postChoice({ title: pollTitle, pollId })
+            .then(response => {
+                setChoices([...choices, response.data]);
+                setPollTitle('');
+            })
             .catch(error => axiosErrorHandler(error, postChoiceErrorMessages));
     }
 
     function handleForm(event) {
-        setPollForm({ ...pollForm, [event.target.name]: event.target.value })
+        setPollTitle(event.target.value);
     }
 
     return (
@@ -52,7 +55,7 @@ export default function CreateChoicePage() {
             </ResultButtonContainerRow>
 
             <form onSubmit={createChoice}>
-                <input placeholder="Opção" type="text" name="title" required onChange={handleForm} />
+                <input placeholder="Opção" type="text" name="title" required onChange={handleForm} value={pollTitle}/>
                 <button>Criar</button>
             </form>
 
@@ -68,7 +71,6 @@ export default function CreateChoicePage() {
         </CreateChoiceContainer>
     )
 }
-
 
 const CreatedOptionContainer = styled.div`
     padding-top: 20px;
